@@ -59,8 +59,6 @@ const ProductsListing = ({ params }: any) => {
   const keywordParams = searchParams && searchParams.get("keyword");
   const specificationParams = searchParams && searchParams.get("Specification");
   const brandParams = searchParams && searchParams.get("Brand");
-console.log(keywordParams);
-console.log(categoriesParams);
   useEffect(() => {
     const fetchData = async () => {
       let params: any = { getattribute: 1, getspecification: 1, getimagegallery: 1 };
@@ -96,6 +94,7 @@ console.log(categoriesParams);
     brandParams,
     categoriesParams,
     specificationParams,
+    keywordParams,
     attribute,
     price,
     slug,
@@ -185,7 +184,7 @@ console.log(categoriesParams);
       }
     };
     fetchData();
-  }, []);
+  }, [slug]);
 
   useEffect(() => {
     const fetchData = async () => {

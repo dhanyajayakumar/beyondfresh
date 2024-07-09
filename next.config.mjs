@@ -3,7 +3,8 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
     images: {
-      domains: ['bfadmin.staging-ecom.com'],
+      // domains: ['bfadmin.staging-ecom.com'],
+      domains: ['bflive.staging-ecom.com'],
     },
   };
   

@@ -16,12 +16,12 @@ import {
 } from '@/utils/types';
 interface MyCartProps {
   myCartEnabled: boolean;
-  changeValue: boolean;
-  item: any;
   cartItems:any,
   updateCart:any,
   setMyCartEnabled: (value: boolean) => void;
-  setChangeValue: (value: boolean) => void;
+  // item: any;
+  // changeValue: boolean;
+  // setChangeValue: (value: boolean) => void;
   anchor?: "left" | "bottom" | "right" | "top" | undefined;
 }
 

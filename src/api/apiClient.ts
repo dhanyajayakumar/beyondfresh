@@ -21,7 +21,7 @@ api.interceptors.request.use((config) => {
   config.headers["User-token"] = uuid;
   const tokenData = getToken();
   if (tokenData && tokenData.token) {
-    // config.headers["Authorization"] = `Bearer ${tokenData.token}`;
+    config.headers["Authorization"] = `Bearer ${tokenData.token}`;
   }
   return config;
 });

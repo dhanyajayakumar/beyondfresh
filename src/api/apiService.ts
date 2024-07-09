@@ -6,7 +6,10 @@ import {
   apiforgotData,
   apiAddToCartData,
   apiUpdateCartData,
-  apiDeleteCartData
+  apiDeleteCartData,
+  myProfileInput,
+  applyCouponApiData,
+  wishlistAddData
 } from "@/utils/types";
 import api from "./apiClient";
 
@@ -168,7 +171,23 @@ export const getAttributeApi = async (params: any) => {
     throw error;
   }
 };
+export const cartListApi = async () => {
+  try {
+    const response = await api.get("/api/cart/get-cart");
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};
 export const addToCart = async (userData: apiAddToCartData): Promise<any> => {
+  try {
+    const response = await api.post("/api/cart/create-cart", userData);
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};
+export const addToCartApi = async (userData: apiAddToCartData): Promise<any> => {
   try {
     const response = await api.post("/api/cart/create-cart", userData);
     return response.data;
@@ -195,6 +214,106 @@ export const deleteCart = async (userData: apiDeleteCartData): Promise<any> => {
 export const getCart = async (params: any) => {
   try {
     const response = await api.get("/api/cart/get-cart", { params });
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};
+
+
+
+export const couponsApi = async () => {
+  try {
+    const response = await api.get("/api/coupons");
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};
+
+export const applyCouponApi = async (
+  query: string,
+  data: applyCouponApiData
+): Promise<any> => {
+  try {
+    const response = await api.post(`/api/coupons/apply-coupon/${query}`, data);
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};
+
+export const allAddressApi = async () => {
+  try {
+    const response = await api.get(`api/customer/get-all-address`);
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};
+
+export const manageAddressApi = async (data: any): Promise<any> => {
+  try {
+    const response = await api.post(`/api/customer/manage-address`, data);
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};
+
+export const makeDefaultAddressApi = async (
+  query: string,
+  data: any
+): Promise<any> => {
+  try {
+    const response = await api.post(
+      `/api/customer/make-default-address/${query}`,
+      data
+    );
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};
+
+export const removeAddressApi = async (query: string): Promise<any> => {
+  try {
+    const response = await api.post(`/api/customer/remove-address/${query}`);
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};
+export const getProfile = async () => {
+  try {
+    const response = await api.get(`api/customer/get-customer-details`);
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};
+
+export const updateProfile = async (userData: myProfileInput): Promise<any> => {
+  try {
+    const response = await api.post("/api/customer/update-profile", userData);
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};
+
+
+export const wishlistListApi = async () => {
+  try {
+    const response = await api.get("/api/wishlist");
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};
+export const wishlistAddApi = async (data: wishlistAddData): Promise<any> => {
+  try {
+    const response = await api.post("/api/wishlist/add-to-wishlist", data);
     return response.data;
   } catch (error) {
     throw error;

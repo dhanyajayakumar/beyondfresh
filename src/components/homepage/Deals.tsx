@@ -1,58 +1,64 @@
 "use client";
-
 import React from "react";
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import { collectionProductsApi } from "@/api/apiService";
 import ProductItem from '../../components/products/ProductItem'; // Adjust the import according to your file structure
 
+interface TimeLeft {
+  hours: number;
+  minutes: number;
+  seconds: number;
+}
+
 const Deals = () => {
-    const [data, setData] = useState<any>([]);
-    const [loading, setLoading] = useState(true);
+  const [data, setData] = useState<any>([]);
+  const [loading, setLoading] = useState(true);
 
-    const calculateTimeLeft = () => {
-        const now = new Date();
-        const nextMidnight = new Date(
-            now.getFullYear(),
-            now.getMonth(),
-            now.getDate() + 1,
-            0, 0, 0, 0
-        );
-        const difference = +nextMidnight - +now;
-        let timeLeft = {};
+  const calculateTimeLeft = () => {
+    const now = new Date();
+    const nextMidnight = new Date(
+      now.getFullYear(),
+      now.getMonth(),
+      now.getDate() + 1,
+      0, 0, 0, 0
+    );
+    const difference = +nextMidnight - +now;
+    let timeLeft: TimeLeft = { hours: 0, minutes: 0, seconds: 0 };
 
-        if (difference > 0) {
-            timeLeft = {
-                hours: Math.floor((difference / (1000 * 60 * 60)) % 24),
-                minutes: Math.floor((difference / 1000 / 60) % 60),
-                seconds: Math.floor((difference / 1000) % 60),
-            };
-        }
+    if (difference > 0) {
+      timeLeft = {
+        hours: Math.floor((difference / (1000 * 60 * 60)) % 24),
+        minutes: Math.floor((difference / 1000 / 60) % 60),
+        seconds: Math.floor((difference / 1000) % 60),
+      };
+    }
 
-        return timeLeft;
+    return timeLeft;
+  };
+
+  const [timeLeft, setTimeLeft] = useState<TimeLeft>(calculateTimeLeft());
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setTimeLeft(calculateTimeLeft());
+    }, 1000);
+
+    return () => clearTimeout(timer);
+  }, []);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const params = { page: "home", pageReference: "top", "getspecification": 1 };
+      const result = await collectionProductsApi(params);
+      if (result?.status) {
+        setData(result?.requestedData);
+      }
+      setLoading(false);
     };
+    fetchData();
+  }, []);
 
-    const [timeLeft, setTimeLeft] = useState(calculateTimeLeft());
-
-    useEffect(() => {
-        const timer = setTimeout(() => {
-            setTimeLeft(calculateTimeLeft());
-        }, 1000);
-
-        return () => clearTimeout(timer);
-    });
-
-    useEffect(() => {
-        const fetchData = async () => {
-            const params = { page: "home", pageReference: "top", "getspecification": 1 };
-            const result = await collectionProductsApi(params);
-            if (result?.status) {
-                setData(result?.requestedData);
-            }
-            setLoading(false);
-        };
-        fetchData();
-    }, []);
     if (loading) {
         return (
             <>

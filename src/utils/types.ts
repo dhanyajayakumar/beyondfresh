@@ -51,6 +51,11 @@ export interface forgotFormInput {
   rePassword: string;
   otp: string;
 }
+export interface myProfileInput {
+  firstName: string;
+  email: string;
+  phone: string;
+}
 export interface apiforgotData {
   email: string;
 }
@@ -92,13 +97,38 @@ export interface apiAddToCartData {
 }
 export interface apiUpdateCartData {
   quantity: number;
-  variantId: string;
+  // variantId: string;
   slug: string;
   quantityChange: boolean;
 
 }
 export interface apiDeleteCartData {
   quantity: number;
-  variantId: string;
+  // variantId: string;
   slug: string;
+}
+
+export interface applyCouponApiData {
+  deviceType: any;
+}
+// types.ts
+export interface AttributeDetail {
+  _id: string;
+  attributeId: number;
+  itemName: string;
+  itemValue: string;
+}
+
+export interface ProductVariantAttribute {
+  attributeId: number;
+  attributeTitle: string;
+  attributeDetail: AttributeDetail;
+}
+
+export interface SelectedAttributesPayload {
+  productVariantAttributes: ProductVariantAttribute[];
+}
+export interface wishlistAddData {
+  slug: string;
+  sku: string;
 }

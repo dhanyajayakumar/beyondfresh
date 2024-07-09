@@ -5,7 +5,7 @@ import Image from "next/image";
 
 import { useRouter } from "next/navigation";
 import { useSelector, useDispatch } from 'react-redux';
-import { useAppDispatch, useAppSelector } from '@/redux/hooks';
+// import { useAppDispatch, useAppSelector } from '@/redux/hooks';
 
 import { RootState, AppDispatch } from '@/utils/redux/store';
 import { addToCartAsync, updateCartAsync, deleteCartAsync, getCartAsync } from '@/utils/redux/slices/cartSlice';
@@ -29,7 +29,7 @@ const Cart = () => {
     dispatch(updateCartAsync(item));
     toast.success("Cart updated successfully.");
   };
-  const cartItems = requestedData.products;
+  const cartItems = requestedData?.products;
 
   return (
     <>
@@ -51,7 +51,7 @@ const Cart = () => {
                   <h2 className="text-2xl font-semibold">Your Items</h2>
                 </div>
 
-                {cartItems.map((cartItem: any) => (
+                {cartItems?.map((cartItem: any) => (
                   <>
                     <div className=" gap-4 border-b mb-6 pb-3">
 

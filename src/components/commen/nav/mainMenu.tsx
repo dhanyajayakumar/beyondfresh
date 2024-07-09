@@ -4,7 +4,7 @@ import cn from "@/utils/class-names";
 import { mainMenuProps } from "@/utils/types";
 import Image from "next/image";
 import Link from "next/link";
-const MainMenu = ({ menuEnabled, subEnabled,children,mainDisabled }: mainMenuProps) => {
+const MainMenu = ({ menuEnabled, subEnabled,mainDisabled }: mainMenuProps) => {
   return (
     <div
       id="dropdownHover"

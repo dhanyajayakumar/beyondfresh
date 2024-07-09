@@ -11,6 +11,7 @@ import { bannerApi, loginUserApi } from "@/api/apiService";
 import { loginUser } from "@/utils/redux/auth";
 import { useDispatch } from "react-redux";
 import ImageComponent from "@/components/commen/image/ImageComponent";
+import { AnyARecord } from "dns";
 
 const Login = (props: any) => {
   const dispatch = useDispatch();
@@ -96,7 +97,7 @@ const Login = (props: any) => {
                 {/* section heading  */}
                 <div className="flex flex-col justify-between w-full mb-8 title-area">
                   <h1 className="mb-2 text-xl font-medium text-black">Login</h1>
-                  <p className="">Don't have an account? <span><Link className="font-medium text-primary hover:text-primary hover:underline" href="/register"> Create here</Link></span>
+                  <p className="">Do not have an account? <span><Link className="font-medium text-primary hover:text-primary hover:underline" href="/register"> Create here</Link></span>
                   </p>
                 </div>
 
@@ -207,7 +208,7 @@ const Login = (props: any) => {
                       x="0px"
                       y="0px"
                       viewBox="0 0 512 512"
-                      style={{ enableBackground: 'new 0 0 512 512' }}
+                      style={{ enableBackground: 'new 0 0 512 512' } as any}
                       xmlSpace="preserve"
                     >
                       <path

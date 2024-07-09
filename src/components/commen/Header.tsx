@@ -54,7 +54,7 @@ const Header = () => {
       try {
         const params = { block: "menu", blockReference: "desktop-menu" };
         const result = await menuApi(params);
-        setData(data); // Assume data is an array of image objects with URLs
+        // setData(result); // Assume data is an array of image objects with URLs
         if (result?.status) {
           setData(result?.requestedData);
         }
@@ -362,7 +362,7 @@ const Header = () => {
         <MainMenu
           menuEnabled={mainMenuEnabled}
           subEnabled={setSubMenuEnabled}
-          children={children}
+          // children={children}
           mainDisabled={setMainMenuEnabled}
         />
         {/* <SubMenu

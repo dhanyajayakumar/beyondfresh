@@ -14,7 +14,7 @@ const Banner = () => {
       try {
         const params = { page: "home", pageReference: "top" };
         const result = await getSliderApi(params);
-        setData(data); // Assume data is an array of image objects with URLs
+        // setData(data); // Assume data is an array of image objects with URLs
         if (result?.status) {
           setData(result?.requestedData);
         }

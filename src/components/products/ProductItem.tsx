@@ -55,7 +55,7 @@ const ProductItem = ({ item }: ItemProps) => {
 
     useEffect(() => {
         if (defaultVariant) {
-            const itemInCart = cartItems?.requestedData?.products.find(cartItem => cartItem.slug === defaultVariant.slug);
+            const itemInCart = cartItems?.requestedData?.products.find((cartItem:any) => cartItem.slug === defaultVariant.slug);
             if (itemInCart) {
                 setQuantity(itemInCart.quantity);
             }

@@ -13,7 +13,7 @@ import { fetchProductDetails } from "@/utils/redux/slices/productSlice";
 import { setQuantity, setSelectedAttributes } from "@/utils/redux/slices/uiSlice";
 import { AppDispatch, RootState } from '@/utils/redux/store'; // Adjust the import path as necessary
 import { Rating } from "@mui/material";
-import ReactImageZoom from 'react-image-zoom';
+import { ProductVariantAttribute } from '@/utils/types';
 
 const ProductDetail = ({ params }: any) => {
   const router = useRouter();
@@ -31,15 +31,15 @@ const ProductDetail = ({ params }: any) => {
     if (data) {
       const defaultVariant = findDefaultProductVariant(data, params);
       if (defaultVariant) {
-        dispatch(setSelectedAttributes({ productVariantAttributes: defaultVariant.productVariantAttributes }));
+        const productVariantAttributes: ProductVariantAttribute[] = defaultVariant.productVariantAttributes;
+        dispatch(setSelectedAttributes({ productVariantAttributes }));
       }
     }
   }, [data, dispatch, params]);
 
   const { quantity, selectedAttributes } = useSelector((state: RootState) => state.ui);
-  console.log(quantity);
-  console.log(selectedAttributes);
-  function transformData(productVariants: any[]) {
+
+  const transformData = (productVariants: any[]) => {
     const attributeMap: { [key: string]: Set<string> } = {};
 
     productVariants?.forEach((variant: any) => {
@@ -84,7 +84,7 @@ const ProductDetail = ({ params }: any) => {
     });
 
     return result;
-  }
+  };
 
   const transformedData = data?.productVariants ? transformData(data.productVariants) : [];
 
@@ -135,22 +135,34 @@ const ProductDetail = ({ params }: any) => {
       toast.error("This product combination is not available");
     }
   };
+
   const findSpecificationBySlug = (variant: any, slug: string) => {
     return variant?.productSpecification?.find((spec: any) => spec.slug === slug);
   };
+
   const handleDecrement = (minQuantity: number) => {
-    const newQuantity = Math.max(parseInt(quantity, 10) - 1, minQuantity);
-
-    dispatch(setQuantity((newQuantity)));
+    const newQuantity = Math.max(quantity - 1, minQuantity);
+    dispatch(setQuantity(newQuantity));
   };
-
+  
   const handleIncrement = (maxQuantity: number) => {
-    const newQuantity = Math.min(parseInt(quantity, 10) + 1, maxQuantity)
+    const newQuantity = Math.min(quantity + 1, maxQuantity);
     dispatch(setQuantity(newQuantity));
   };
 
+  // const handleDecrement = (minQuantity: any) => {
+  //   const newQuantity = Math.max(parseInt(quantity, 10) - 1, minQuantity);
+  //   dispatch(setQuantity(newQuantity));
+  // };
+
+  // const handleIncrement = (maxQuantity: any) => {
+  //   const newQuantity = Math.min(parseInt(quantity, 10) + 1, maxQuantity);
+  //   dispatch(setQuantity(newQuantity));
+  // };
+
   const defaultVariant = findDefaultProductVariant(data, params);
   const originCountrySpecification = findSpecificationBySlug(defaultVariant, "origin-country");
+
   if (loading) {
     return (
       <>

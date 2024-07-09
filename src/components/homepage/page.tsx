@@ -4,10 +4,11 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 
 import Banner from "@/components/homepage/banner";
-import Deals from "@/components/homepage/deals";
+// import Deals from "@/components/homepage/deals";
+import Deals from "@/components/homepage/Deals";
 import Catagory from "@/components/homepage/catagory";
 import HomeFresh from "@/components/homepage/homeFresh";
-import CategoryTwo from "@/components/homepage/CategoryTwo";
+import CategoryTwo from "@/components/homepage/categoryTwo";
 import AdBanner from "@/components/homepage/adBanner";
 import BeyondFresh from "@/components/homepage/beyondFresh";
 import AceImg from "@/components/homepage/aceImg";

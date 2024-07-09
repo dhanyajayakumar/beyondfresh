@@ -10,7 +10,7 @@ interface CartItem {
 }
 
 interface CartState {
-  items: CartItem[];
+  items: any;
   status: 'idle' | 'loading' | 'succeeded' | 'failed';
   error: string | null;
 }
@@ -82,7 +82,7 @@ const cartSlice = createSlice({
       })
       .addCase(updateCartAsync.fulfilled, (state, action: PayloadAction<CartItem>) => {
         state.status = 'succeeded';
-        const itemIndex = state.items.findIndex(item => item.id === action.payload.id);
+        const itemIndex = state.items.findIndex((item:any) => item.id === action.payload.id);
         if (itemIndex >= 0) {
           state.items[itemIndex] = action.payload;
         }
@@ -96,7 +96,7 @@ const cartSlice = createSlice({
       })
       .addCase(deleteCartAsync.fulfilled, (state, action: PayloadAction<{ id: string }>) => {
         state.status = 'succeeded';
-        state.items = state.items.filter(item => item.id !== action.payload.id);
+        state.items = state.items.filter((item:any) => item.id !== action.payload.id);
       })
       .addCase(deleteCartAsync.rejected, (state, action) => {
         state.status = 'failed';
